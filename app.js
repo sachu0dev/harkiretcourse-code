@@ -174,6 +174,48 @@ function explainParseInt(value) {
 // ******** date *********
 // const currentDate =  new Date();
 
-console.log(currentDate.getDate());
-console.log(currentDate.getFullYear());
-console.log(currentDate);
+// console.log(currentDate.getDate());
+// console.log(currentDate.getFullYear());
+// console.log(currentDate);
+
+// const currentDate  = new Date();
+// console.log("time in milliseconds since 1970", currentDate.getTime());
+
+// function calculateSum (){
+//   let a = 0;
+//   for (let i = 0; i < 1000000; i++){
+//     a = a + 1
+//   }
+//   return a;
+// }
+// const beforeDate = new Date();
+// const beforeTimeinMs = beforeDate.getTime();
+// calculateSum();
+
+// const afterDate = new Date();
+// const afterTimeinMs = afterDate.getTime();
+
+// console.log(afterTimeinMs - beforeTimeinMs);
+
+
+// function currenTimePrint(){
+//   const currentDate = new Date();
+//   const Seconds = Math.round(currentDate.getSeconds());
+//   const Minutes = Math.round(currentDate.getMinutes());
+//   const Hours = Math.round(currentDate.getHours());
+//   console.log(Hours + ":" + Minutes + ":" + Seconds);
+// }
+
+// setInterval(currenTimePrint, 1000);
+
+// const user = {
+//   name: "sushil",
+//   age: 20,
+//   gender: "male",
+//   location: "Pathankot"
+// }
+// const finalString =JSON.stringify(user);
+// console.log(finalString);
+// const finalObject = JSON.parse(finalString);
+// console.log(finalObject.name)
+
