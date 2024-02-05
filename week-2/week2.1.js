@@ -67,13 +67,42 @@
 // function promisideTimeout(time){
 //   return new Promise((resolve)=>{
 //     setTimeout(resolve, time);
+//     console.log("test1");
 //   });
 // }
 
 // promisideTimeout(3000).then(()=>{
 //   console.log("hi there");
 // })
+//  problem statement for future tests
+// let n = new Promise((resolve)=>{
+//   resolve();
+//   console.log(n);
+// }).then(()=>{
+//   console.log("hi there");
+// // });
+// let a = 0;
+// function myOwnSetTimeout(fn, time){
+//   setTimeout(fn, time);
+//   console.log(a + "sync call");
+//   a = a + 10;
+//   setTimeout(fn, time);
+// }
 
+// myOwnSetTimeout(()=>{
+//   a = 0;
+//   console.log(a);
+// }, 1000);
+// let a = 0;
+// function fn(resolve){
+//   for(i = 0; i<100; i++){
+//     a = a+1;
+//   }
+//   resolve(a);
+// }
 
+// const p = new Promise(fn);
 
-
+// p.then((a)=>{
+//   console.log(a);
+// })
