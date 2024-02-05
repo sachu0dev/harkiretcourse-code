@@ -64,7 +64,15 @@
 //   console.log("hi there");
 // }, 1000);
 
-// 
+// function promisideTimeout(time){
+//   return new Promise((resolve)=>{
+//     setTimeout(resolve, time);
+//   });
+// }
+
+// promisideTimeout(3000).then(()=>{
+//   console.log("hi there");
+// })
 
 
 
