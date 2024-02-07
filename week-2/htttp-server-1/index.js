@@ -5,11 +5,10 @@ const port = 3000
 
 
 app.use(bodyParser.json());
-app.get('/', (req, res) => {
-  console.log(req.body);
-  res.send('Hello World! is changed')
+app.post('/', (req, res) => {
+  res.send(`geting from post request: ${req.body.message}`);
 })
-app.post('/news', (req, res)=>{
+app.get('/news', (req, res)=>{
   let a = 10;
   res.send('this is news')
 })
