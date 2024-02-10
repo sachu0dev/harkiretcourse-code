@@ -12,33 +12,7 @@
 	}
   Output - [{ category: 'Food', totalSpent: 10 }] // Can have multiple categories, only one example is mentioned here
 */
-const transactions = [{
-  id: 1,
-  timestamp: 1656076800000,
-  price: 10,
-  category: 'Food',
-  itemName: 'Pizza',
-}, {
-  id: 2,
-  timestamp: 1656076800000,
-  price: 100,
-  category: 'Games',
-  itemName: 'GOW',
-}
-, {
-  id: 3,
-  timestamp: 1656076800000,
-  price: 20,
-  category: 'Food',
-  itemName: 'ButterNan',
-},
-{
-  id: 4,
-  timestamp: 1656076800000,
-  price: 56,
-  category: 'Games',
-  itemName: 'Elden Ring',
-}]
+
 function calculateTotalSpentByCategory(transactions) {
   const output = [];
   const categories = [];
@@ -54,7 +28,5 @@ function calculateTotalSpentByCategory(transactions) {
 
   return output;
 }
-
-console.log(calculateTotalSpentByCategory(transactions));
 module.exports = calculateTotalSpentByCategory;
 
