@@ -1,6 +1,16 @@
 const express = require('express');
 const app = express();
+let numberOfRequests = 0;
 
+function calculateRequests(req, res, next){
+  numberOfRequests++;
+  console.log(numberOfRequests);
+  if(numberOfRequests <= 3){
+    next();
+    return;
+  }
+  res.send("request limit exceeded");
+}
 function userMiddleware(req, res, next){
   const username = req.headers.username;
   const password = req.headers.password;
@@ -19,7 +29,7 @@ if(kidneyId != 1 && kidneyId != 2){
   }
 }
 
-app.get('/health-checkup',userMiddleware,kidenyMiddleWare,(req, res)=>{
+app.get('/health-checkup',calculateRequests,userMiddleware,kidenyMiddleWare,(req, res)=>{
   res.json({
     msg: "your kidenys are healthy"
   })
