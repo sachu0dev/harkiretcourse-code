@@ -5,12 +5,14 @@ let numberOfRequests = 0;
 function calculateRequests(req, res, next){
   numberOfRequests++;
   console.log(numberOfRequests);
-  if(numberOfRequests <= 3){
+  if(numberOfRequests <= 10){
     next();
     return;
   }
   res.send("request limit exceeded");
+  console.log("request limit exceeded");
 }
+app.use(calculateRequests);
 function userMiddleware(req, res, next){
   const username = req.headers.username;
   const password = req.headers.password;
@@ -28,8 +30,8 @@ if(kidneyId != 1 && kidneyId != 2){
     next();
   }
 }
-
-app.get('/health-checkup',calculateRequests,userMiddleware,kidenyMiddleWare,(req, res)=>{
+app.use(express.json()); 
+app.post('/health-checkup',userMiddleware,kidenyMiddleWare,(req, res)=>{
   res.json({
     msg: "your kidenys are healthy"
   })
