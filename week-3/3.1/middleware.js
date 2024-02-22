@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 let numberOfRequests = 0;
+app.use(express.json()); 
 
 function calculateRequests(req, res, next){
   numberOfRequests++;
@@ -30,12 +31,14 @@ if(kidneyId != 1 && kidneyId != 2){
     next();
   }
 }
-app.use(express.json()); 
 app.post('/health-checkup',userMiddleware,kidenyMiddleWare,(req, res)=>{
   res.json({
-    msg: "your kidenys are healthy"
+    // intentional error
+    msg: "hello world"
   })
 })
-
+app.use((err, req, res , next)=>{
+  res.status(500).send("something went wrong at server side");
+})
 
 app.listen(3000);
