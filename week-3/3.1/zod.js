@@ -4,20 +4,14 @@ const z = require('zod')
 // const schema = z.array(z.number());
 
 const schema = z.object({
-  email: z.string(),
-  password: z.string(),
+  email: z.string().email(),
+  password: z.string().min(8),
   country: z.literal("IN").or(z.literal("US")),
-  kidneys: z.array(z.number())
 })
 app.use(express.json())
 
 app.post("/", (req, res)=>{
-  const inputs = {
-    email: req.body.email,
-    password: req.body.password,
-    country: req.body.country,
-    kidneys: req.body.kidneys
-  }
+  const inputs = req.body;
   const response = schema.safeParse(inputs);
   if(!response.success){
     return res.status(411).json({
@@ -25,13 +19,6 @@ app.post("/", (req, res)=>{
     })
   }
   res.json(inputs)
-  // const kidneyLength = kidneys.length;
-  // if(kidneyLength > 2){
-  //   return res.status(400).json({msg:'too many kidneys'});
-  // }
-  // res.json({
-  //   msg: "you have " + kidneyLength + " kidneys",
-  // })
 })
 
 
