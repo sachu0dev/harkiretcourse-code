@@ -1,7 +1,6 @@
 const express = require('express')
 const app = express()
 const z = require('zod')
-// const schema = z.array(z.number());
 
 const schema = z.object({
   email: z.string().email(),
@@ -18,7 +17,9 @@ app.post("/", (req, res)=>{
       msg: "wrong input recived"
     })
   }
-  res.json(inputs)
+  res.json({
+    msg: "auth successful"
+  })
 })
 
 
