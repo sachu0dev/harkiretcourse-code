@@ -1,16 +1,16 @@
 function validateInput(arr){
-  if(!Array.isArray(arr) || arr.length === 0){
-    return false; 
+  if(typeof(arr) !== 'object' && arr.length > 0){
+    return false;
   }
-  for(let i = 0;  i < arr.length; i++){
+  for(let i = 0;  i < arr.lengh; i++){
     if(typeof(arr[i]) !== 'string'){
-      return false; 
+      return false;
     }
   }
-  return true; 
+  return true;
 }
 
-console.log(validateInput(['this','this',1])); 
+console.log(validateInput(['this','this', 1]));
 
 
 const z = require('zod')
