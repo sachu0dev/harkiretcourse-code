@@ -30,6 +30,24 @@ function userExists(username, password) {
   }
   return false;
 }
+app.post("/signup", function (req, res) {
+  const username = req.body.username;
+  const password = req.body.password;
+
+  if (userExists(username, password)) {
+    return res.status(403).json({
+      msg: "User already exists, try to signin",
+    });
+  }
+
+  ALL_USERS.push({
+    username,
+    password,
+  });
+  return res.json({
+    msg: "User created successfully can now try to signin",
+  });
+})
 app.post("/signin", function (req, res) {
   const username = req.body.username;
   const password = req.body.password;
