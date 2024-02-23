@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.css"
+      integrity="sha512-tx5+1LWHez1QiaXlAyDwzdBTfDjX07GMapQoFTS74wkcPMsI3So0KYmFe6EHZjI8+eSG0ljBlAQc3PQ5BTaZtQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- style -->
+    <title></title>
+  </head>
+  <body>
+    <button onclick="getPersonsData()">get persons data</button>
+    <div class="data-container"></div>
+    <!-- scripts -->
+    <script>
+      async function getPersonsData() {
+        // one way to write
+        // const response = fetch("https://fakerapi.it/api/v1/persons").then(
+        //   (response) => {
+        //     response.json().then((data) => {
+        //       console.log(data);
+        //     });
+        //   }
+        // );
+        // await method and await needs the function to be async
+        const response = await fetch("https://fakerapi.it/api/v1/persons");
+        const finalData = await response.json();
+        const dataContainer = document.querySelector(".data-container");
+        dataContainer.innerHTML = JSON.stringify(finalData.data);
+      }
+    </script>
+  </body>
+</html>
