@@ -21,7 +21,6 @@ const ALL_USERS = [
     name: "Priya kumari",
   },
 ];
-
 function userExists(username, password) {
   for (const user of ALL_USERS) {
     if (user.username === username && user.password === password) {
@@ -33,6 +32,7 @@ function userExists(username, password) {
 app.post("/signup", function (req, res) {
   const username = req.body.username;
   const password = req.body.password;
+  const name = req.body.name;
 
   if (userExists(username, password)) {
     return res.status(403).json({
@@ -43,6 +43,7 @@ app.post("/signup", function (req, res) {
   ALL_USERS.push({
     username,
     password,
+    name
   });
   return res.json({
     msg: "User created successfully can now try to signin",
@@ -54,11 +55,11 @@ app.post("/signin", function (req, res) {
 
   if (!userExists(username, password)) {
     return res.status(403).json({
-      msg: "User doesnt exist in our in memory db",
+      msg: "User doesnt exist in our in memory db pls signup first",
     });
   }
 
-  var token = jwt.sign({ username: username }, "123456");
+  var token = jwt.sign({ username: username }, jwtPassword);
   return res.json({
     token,
   });
@@ -69,11 +70,15 @@ app.get("/users", function (req, res) {
   try {
     const decoded = jwt.verify(token, jwtPassword);
     const username = decoded.username;
+    const a = ALL_USERS.find((user) => user.username === username);
+    if(!a){
+      throw new Error("user not found")
+    }
     const users = ALL_USERS.filter((user) => user.username !== username);
     res.json(users)
   } catch (err) {
     return res.status(403).json({
-      msg: "Invalid token",
+      msg: "Invalid token, users not found",
     });
   }
 });
