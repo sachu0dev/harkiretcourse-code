@@ -44,5 +44,6 @@ class Calculator {
   calculate(expression) {
     
 }
+}
 
 module.exports = Calculator;
