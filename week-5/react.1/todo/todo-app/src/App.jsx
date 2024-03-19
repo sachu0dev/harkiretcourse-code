@@ -2,19 +2,53 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-  const 
-  const [count, setCount] = useState(0);
+  const [todos, setTodos] = useState([
+    {
+      title: "go to gym",
+      description: "go to gym at 4pm",
+      completed: false,
+    },
+    {
+      title: "go to gym",
+      description: "go to gym at 4pm",
+      completed: false,
+    },
+  ]);
+  function addTodo() {
+    setTodos([
+      ...todos,
+      {
+        title: "new todo",
+        description: "desc to new todo",
+      },
+    ]);
+  }
   return (
     <>
-      <CustomButton count={count} setCount={setCount} />
+      <button onClick={addTodo}>add random Todo</button>
+
+      {todos.map((todo, index) => {
+        return (
+          <div>
+            <Todo
+              key={index}
+              title={todo.title}
+              description={todo.description}
+            />
+          </div>
+        );
+      })}
     </>
   );
 }
-const CustomButton = (props) => {
-  function onClickHandler() {
-    props.setCount(props.count + 1);
-  }
-  return <button onClick={onClickHandler}>Counter {props.count}</button>;
+
+const Todo = (prop) => {
+  return (
+    <div>
+      <h1>{prop.title}</h1>
+      <h2>{prop.description}</h2>
+    </div>
+  );
 };
 
 export default App;
