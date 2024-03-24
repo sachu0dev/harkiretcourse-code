@@ -29,7 +29,6 @@ app.post("/todo", (req, res)=>{
     res.send("wrong input todo not created")
     return
   }
-    console.log("todo is vailed");
     todoList.push({
       id: tempId,
       title: data.title,
@@ -51,7 +50,6 @@ app.get("/todos", (req, res)=>{
 app.post("/completed", (req, res) => {
   const data = req.body.id;
   const checkId = updateTodo.safeParse(data);
-  console.log(checkId);
   
   if (checkId.success) {
     let todoUpdated = false;
@@ -59,7 +57,6 @@ app.post("/completed", (req, res) => {
     todoList.forEach((todo) => {
       if (todo.id == data) {
         todo.isCompleted = !todo.isCompleted;
-        console.log("inside for loop");
         todoUpdated = true; 
       }
     });
