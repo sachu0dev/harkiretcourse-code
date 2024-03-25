@@ -1,11 +1,11 @@
 const { createTodo, updateTodo } = require("./types.js");
-require('dotenv').config();
 const express = require("express");
 const app = express();
-const bodyParser = require('body-parser');
 const port = 1234;
+require('dotenv').config();
 const mongodbUri = process.env.MONGODB_URI;
 const mongoose = require("mongoose");
+const {todo} = require("./db.js")
 
 
 mongoose.connect(mongodbUri, {
@@ -20,7 +20,6 @@ mongoose.connect(mongodbUri, {
 
 app.use(express.json());
 const todoList = [];
-let tempId = 0;
 
 app.post("/todo", (req, res)=>{
   const data = req.body;
