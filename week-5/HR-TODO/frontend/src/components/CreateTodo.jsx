@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const CreateTodo = ({ setTodos }) => {
+const CreateTodo = ({ setTodos, todos }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   function handelAdd() {
@@ -15,6 +15,13 @@ const CreateTodo = ({ setTodos }) => {
       },
     }).then(async (res) => {
       const json = await res.json();
+      if (res.status === 200) {
+        setTodos((todos) => {
+          const updatedTodos = [...todos, json.newTodo];
+          setTodos(updatedTodos);
+          return updatedTodos;
+        });
+      }
     });
   }
 

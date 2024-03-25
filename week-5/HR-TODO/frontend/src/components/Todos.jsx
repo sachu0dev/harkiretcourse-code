@@ -1,7 +1,7 @@
-const Todos = ({ todos }) => {
+const Todos = ({ todos, setTodos }) => {
   return (
     <div className="overflow-scroll">
-      {todos.map((todo) => {
+      {todos.map((todo, index) => {
         return (
           <div key={todo._id} className="flex flex-col">
             <h1 className="text-4xl font-bold">{todo.title}</h1>
@@ -19,7 +19,16 @@ const Todos = ({ todos }) => {
                   },
                 }).then(async (res) => {
                   const json = await res.json();
+                  setTodos(
+                    todos.map((b) => {
+                      if (b._id === json.todoItem._id) {
+                        return json.todoItem;
+                      }
+                      return b;
+                    })
+                  );
                 });
+                console.log(todos);
               }}
             >
               {todo.completed == true ? "Done!" : "Mark as complete"}

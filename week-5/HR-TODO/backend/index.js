@@ -35,8 +35,14 @@ app.post("/todo", async (req, res)=>{
       description: data.description,
       completed: false
     })
-    res.json({
-      msg: "Todo Created"
+    const newTodo = await todo.findOne({
+      title: data.title,
+      description: data.description,
+      completed: false
+    });
+    res.status(200).json({
+      msg: "Todo Created",
+      newTodo: newTodo
     })
     console.log("todo created");
 })
@@ -62,7 +68,11 @@ app.post("/completed", async (req, res) => {
       if (todoItem) {
         todoItem.completed = !todoItem.completed; // Toggle completion status
         await todoItem.save();
-        res.send("Todo updated");
+        
+        res.json({
+          msg: "todo updated",
+          todoItem: todoItem
+        })
       } else {
         res.status(404).json({ msg: "No todo found" });
       }
