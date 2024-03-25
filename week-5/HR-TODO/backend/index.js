@@ -2,11 +2,11 @@ const { createTodo, updateTodo } = require("./types.js");
 const express = require("express");
 const app = express();
 const port = 1234;
+const cors = require("cors");
 require('dotenv').config();
 const mongodbUri = process.env.MONGODB_URI;
 const mongoose = require("mongoose");
 const {todo} = require("./db.js")
-
 
 mongoose.connect(mongodbUri, {
 }).then(() => {
@@ -19,9 +19,11 @@ mongoose.connect(mongodbUri, {
 
 
 app.use(express.json());
+app.use(cors());
 const todoList = [];
 
 app.post("/todo", async (req, res)=>{
+  console.log(req.body);
   const data = req.body;
   const checkTodo = createTodo.safeParse(data);
   if(!checkTodo.success){
@@ -36,13 +38,16 @@ app.post("/todo", async (req, res)=>{
     res.json({
       msg: "Todo Created"
     })
+    console.log("todo created");
 })
 
 
 
 app.get("/todos", async (req, res)=>{
  const todos = await todo.find({});
- res.json(todos)
+ res.json({
+  todos,
+ })
 });
 
 
