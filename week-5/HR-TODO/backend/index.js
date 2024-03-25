@@ -21,52 +21,52 @@ mongoose.connect(mongodbUri, {
 app.use(express.json());
 const todoList = [];
 
-app.post("/todo", (req, res)=>{
+app.post("/todo", async (req, res)=>{
   const data = req.body;
   const checkTodo = createTodo.safeParse(data);
   if(!checkTodo.success){
     res.send("wrong input todo not created")
     return
   }
-    todoList.push({
-      id: tempId,
+    await todo.create({
       title: data.title,
       description: data.description,
-      isCompleted: false
+      completed: false
     })
-    tempId = tempId + 1;
-    res.send("new todo created");
+    res.json({
+      msg: "Todo Created"
+    })
 })
 
 
 
-app.get("/todos", (req, res)=>{
-    res.json(todoList)
+app.get("/todos", async (req, res)=>{
+ const todos = await todo.find({});
+ res.json(todos)
 });
 
 
 
-app.post("/completed", (req, res) => {
+app.post("/completed", async (req, res) => {
   const data = req.body.id;
   const checkId = updateTodo.safeParse(data);
   
   if (checkId.success) {
-    let todoUpdated = false;
-    
-    todoList.forEach((todo) => {
-      if (todo.id == data) {
-        todo.isCompleted = !todo.isCompleted;
-        todoUpdated = true; 
+    try {
+      const todoItem = await todo.findById(data);
+      if (todoItem) {
+        todoItem.completed = !todoItem.completed; // Toggle completion status
+        await todoItem.save();
+        res.send("Todo updated");
+      } else {
+        res.status(404).json({ msg: "No todo found" });
       }
-    });
-
-    if (todoUpdated) {
-      res.send("todo updated");
-    } else {
-      res.send("todo not found");
+    } catch (error) {
+      console.error("Error updating todo:", error);
+      res.status(500).send("Internal Server Error");
     }
   } else {
-    res.send("wrong input");
+    res.status(400).send("Wrong input");
   }
 });
 
