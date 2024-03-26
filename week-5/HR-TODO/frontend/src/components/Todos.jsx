@@ -1,6 +1,6 @@
 const Todos = ({ todos, setTodos }) => {
   return (
-    <div className="overflow-scroll">
+    <div className="w-full">
       {todos.map((todo, index) => {
         return (
           <div key={todo._id} className="flex flex-col">

@@ -26,7 +26,7 @@ const CreateTodo = ({ setTodos, todos }) => {
   }
 
   return (
-    <div className="flex justify-center items-center flex-col">
+    <div className="flex justify-center items-center flex-col w-full">
       <input
         className=" p-4 text-lg text-black m-4 rounded-md border border-gray border-solid"
         type="text"
