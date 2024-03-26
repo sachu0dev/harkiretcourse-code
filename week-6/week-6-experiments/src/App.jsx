@@ -1,30 +1,51 @@
-import { memo, useState } from "react";
-function App() {
-  const [randomNo, setRandomNo] = useState("sushil");
-  function handelClick() {
-    const no = Math.random();
-    setRandomNo(no);
-  }
+import { useState } from "react";
 
+function App() {
+  const [todos, setTodos] = useState([
+    {
+      title: "go to gym",
+      description: "this is description",
+    },
+    {
+      title: "go to gym",
+      description: "this is description",
+    },
+    {
+      title: "go to gym",
+      description: "this is description",
+    },
+  ]);
   return (
     <>
-      <button onClick={handelClick}>Click to change</button>
-      <Header title={randomNo} />
-      <Header title="second title" />
-      <Header title="second title" />
-      <Header title="second title" />
-      <Header title="second title" />
-      <Header title="second title" />
+      <Input />
+      <button>Add Todo</button>
+      {todos.map((todo) => {
+        return (
+          <div>
+            <h3>{todo.title}</h3>
+            <h3>{todo.description}</h3>
+          </div>
+        );
+      })}
     </>
   );
 }
-const Header = memo(function Header({ title }) {
-  console.log(title);
+
+const Todo = ({ title, description }) => {
   return (
     <div>
-      <h1>this is title : {title}</h1>
+      <h3>{title}</h3>
+      <h3>{description}</h3>
     </div>
   );
-});
+};
+const Input = () => {
+  return (
+    <div>
+      <input type="text" placeholder="title" />
+      <input type="text" placeholder="title" />
+    </div>
+  );
+};
 
 export default App;
