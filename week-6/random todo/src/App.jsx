@@ -31,8 +31,8 @@ function App() {
 const Todo = ({ title, description }) => {
   return (
     <div>
-      <h1>{title}</h1>
-      <h1>{description}</h1>
+      <h1 className="text-2xl text-red-600 font-bold">{title}</h1>
+      <h1 className="text-xl  font-bold">{description}</h1>
     </div>
   );
 };
