@@ -55,15 +55,23 @@ function App() {
       </div>
       {todos.map((todo) => {
         return (
-          <div key={todo.id}>
-            <h3>{todo.title}</h3>
-            <h3>{todo.description}</h3>
-            <p>{todo.id}</p>
-          </div>
+          <Todo
+            key={todo.id}
+            title={todo.title}
+            description={todo.description}
+          />
         );
       })}
     </>
   );
 }
 
+const Todo = ({ title, description }) => {
+  return (
+    <div>
+      <h3>{title}</h3>
+      <h3>{description}</h3>
+    </div>
+  );
+};
 export default App;
