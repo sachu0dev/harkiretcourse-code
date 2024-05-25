@@ -1,5 +1,4 @@
 import { getClient } from "./utils";
-const client = await getClient();
 
 async function createTable() {
   const createUserTableQuery = `
@@ -9,6 +8,7 @@ async function createTable() {
             password VARCHAR(255) NOT NULL
         );
     `;
+  const client = await getClient();
 
   await client.query(createUserTableQuery);
 
